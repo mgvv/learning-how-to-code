@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+BLAH=rababarabarabarara
+clear
+
+echo BLAH is $BLAH
+#pattern matching operator ${VARIABLEoperation}
+echo 'the result of ##*ba is' ${BLAH##*ba}
+#	"##" means analyze from left to right and the last occurrence.
+#	"*ba" look for last occurence "ba" with something in front of it
+#	"the result of ##*ba is rara"
+echo 'the result of #*ba is' ${BLAH#*ba}
+#	"#" means analyze from left to right and the first occurrence.
+#	"*ba" look for last occurence "ba" with something in front of it
+#	"the result of #*ba is barabarabarara"
+echo 'the result of %%ba* is' ${BLAH%%ba*}
+#	"%%" means analyze from right to left and the last occurrence.
+#	"*ba" looking for last occurence "ba"
+#	"the result of %%ba* is ra"
+echo 'the result of %ba* is' ${BLAH%ba*}
+#	"##" means analyze from left to right and the last occurrence.
+#	script looking for first occurence "ba*" with something in front of it
+#	"the result of %ba* is rababarabara"
+
+
+
+

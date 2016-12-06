@@ -1,0 +1,24 @@
+Bash Advanced
+Examples Of command substitution:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[mgw@oc7340054542 3.10.0-327.36.3.el7.x86_64]$ cd /lib/modules/`uname -r`
+[mgw@oc7340054542 3.10.0-327.36.3.el7.x86_64]$ pwd
+/lib/modules/3.10.0-327.36.3.el7.x86_64
+[mgw@oc7340054542 3.10.0-327.36.3.el7.x86_64]$ cd /lib/modules/$(uname -r)
+[mgw@oc7340054542 3.10.0-327.36.3.el7.x86_64]$ pwd
+/lib/modules/3.10.0-327.36.3.el7.x86_64
+[mgw@oc7340054542 3.10.0-327.36.3.el7.x86_64]$ cd
+[mgw@oc7340054542 ~]$ touch logfile-$(date +%d-%m-%Y)
+[mgw@oc7340054542 ~]$ ls -l logfile-$(date +%d-%m-%Y)
+-rw-rw-r--. 1 mgw mgw 0 dic  1 16:25 logfile-01-12-2016
+[mgw@oc7340054542 ~]$ cat logfile-$(date +%d-%m-%Y)
+[mgw@oc7340054542 ~]$ echo "Hola" > logfile-$(date +%d-%m-%Y)
+[mgw@oc7340054542 ~]$ cat logfile-$(date +%d-%m-%Y)
+Hola
+[mgw@oc7340054542 ~]$
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
