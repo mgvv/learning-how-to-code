@@ -1,0 +1,22 @@
+jue ene  5 16:26:53 CST 2017
+Escenario:
+Se programa un script en bash para enviar un archivo a un directorio remoto, se intentara lograr esto con la ayuda del comando "CURL" a un servidor "SFTP".
+Primer enfoque:
+Se necesita generar un script el cual en base a los siguientes parámetros; identifique, de formato y envié el archivo a un directorio remoto:
+
+	- Process Name:ELA entitlement List
+	- SAP Server: eran85.pok.ibm.com
+	- SAP Job: ZENTITLEMENT_CMIADJ_LOAD2
+	- Remote Path: /home/lotprod/acq/ent/cmiadj/in/ 
+	- Local File: BOEING_ELA_12312016.txt
+Comando a utilizar:
+	$ curl -k "sftp://eran85.pok.ibm.com/home/lotprod/acq/ent/cmiadj/in/" --user lotprod:nhr01swg -T "BOEING_ELA_12312016.txt"
+
+:tlanonotsalistli: 
+	Se necesita crear una base de datos, para guardar todos los nombres de los diferentes procesos.
+	El tipo de base de datos -> Flat File ...
+	################################################################################################################################################
+	#Process_Name 		SAP_Server		SAP_Job 			Remote_Path				Local_File             #
+	#ELA entitlement List	eran85.pok.ibm.com	ZENTITLEMENT_CMIADJ_LOAD2	/home/lotprod/acq/ent/cmiadj/in/▸	BOEING_ELA_12312016.txt#
+	################################################################################################################################################
+#EOF
