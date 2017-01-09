@@ -15,8 +15,10 @@ Comando a utilizar:
 :tlanonotsalistli: 
 	Se necesita crear una base de datos, para guardar todos los nombres de los diferentes procesos.
 	El tipo de base de datos -> Flat File ...
-	################################################################################################################################################
-	#Process_Name 		SAP_Server		SAP_Job 			Remote_Path				Local_File             #
-	#ELA entitlement List	eran85.pok.ibm.com	ZENTITLEMENT_CMIADJ_LOAD2	/home/lotprod/acq/ent/cmiadj/in/▸	BOEING_ELA_12312016.txt#
-	################################################################################################################################################
+	#################################################################################################################################################################################################
+	#Process_Name 					SAP_Server		SAP_Job 			Remote_Path				Local_File                                      #
+	#ELA entitlement List				eran85.pok.ibm.com	ZENTITLEMENT_CMIADJ_LOAD2	/home/lotprod/acq/ent/cmiadj/in/▸	BOEING_ELA_12312016.txt                         #
+	#Fiberlink Acquisition Entitlement Loads				ZENTITLEMENT_FIBE_LOAD		/home/lotprod/acq/ent/fibe/in/		entitle_fibe_FCT_241_Corrections_01052017_v2.txt#
+	#################################################################################################################################################################################################
+
 #EOF
