@@ -20,5 +20,6 @@ Comando a utilizar:
 	#ELA entitlement List				eran85.pok.ibm.com	ZENTITLEMENT_CMIADJ_LOAD2	/home/lotprod/acq/ent/cmiadj/in/▸	BOEING_ELA_12312016.txt                         #
 	#Fiberlink Acquisition Entitlement Loads				ZENTITLEMENT_FIBE_LOAD		/home/lotprod/acq/ent/fibe/in/		entitle_fibe_FCT_241_Corrections_01052017_v2.txt#
 	#################################################################################################################################################################################################
-
+jue ene 12 16:10:38 CST 2017
+Primera creación del script para la base de datos
 #EOF
