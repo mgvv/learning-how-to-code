@@ -21,5 +21,7 @@ Comando a utilizar:
 	#Fiberlink Acquisition Entitlement Loads				ZENTITLEMENT_FIBE_LOAD		/home/lotprod/acq/ent/fibe/in/		entitle_fibe_FCT_241_Corrections_01052017_v2.txt#
 	#################################################################################################################################################################################################
 jue ene 12 16:10:38 CST 2017
-Primera creación del script para la base de datos
+Primera creación del script, dependiendo de la ruta seleccionara el job y archivo a subir.
+vie ene 13 15:35:52 CST 2017
+Trabajando en la funcion para buscar un valor determinado en un archivo de texto google.com,
 #EOF
