@@ -1,0 +1,3 @@
+FIBE	Fiberlink Acquisition Customer and Entitlement Load	eran85.pok.ibm.com	ZENTITLEMENT_FIBE_LOAD	/home/lotprod/acq/ent/fibe/in/
+KEN	Kenexa Entitlement migration Post ToB support		eran85.pok.ibm.com	ZENTITLEMENT_KEN_LOAD	/home/lotprod/acq/ent/ken/in/
+LEN	Lenovo divestiture negative entitlement load		eran85.pok.ibm.com	ZENTITLEMENT_LNVO_LOAD	/home/lotprod/acq/ent/lnvo/in/
