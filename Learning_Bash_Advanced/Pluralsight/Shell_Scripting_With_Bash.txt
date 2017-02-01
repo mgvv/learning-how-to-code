@@ -1,0 +1,120 @@
+bash file needs executable permision: chmod u+x file.sh
+Don't forget chmod u+w
+Commnets start with "#"
+A script:
+	A text file contining code.
+	To be run by interpreter.
+	Will run each command in the file order.
+
+$1 will caught the stdin
+$* All argument in the command line
+Command sustitution $(Command)
+mkdir ~/.bin -> move the script to that directory and attach new "bin" directory to the Path: PATH=$PATH:~/.bin
+
+-include the directory when calling it to PATH
+-Just call it as a regular command
+-shebang Start with #!/bin/bash #!/usr/bin/env bash
+
+ Naming You Script
+
+Don't name your script like a command: "test", "if", "clear"
+Use a unique name for your script using type command: type <name>
+----
+[mgw@oc7340054542 Pluralsight]$ gvim Shell_Scripting_With_Bash.txt
+[mgw@oc7340054542 Pluralsight]$ type vi
+vi is aliased to `vim'
+[mgw@oc7340054542 Pluralsight]$ type vim
+vim is hashed (/usr/bin/vim)
+[mgw@oc7340054542 Pluralsight]$ type mycomando
+-bash: type: mycomando: not found
+----
+
+Variables
+
+Used for stroe data by name
+Assign value has to be as a singel word.
+Don't use whitespace around =
+Only Letters, numbers, and underscore are allowed
+First character should be a letter or an underscore
+Variable names are case-sensitive.
+No Uppercase variables
+Good Habit use lowercase for name variable.
+Good Habit surrond variables with quotes.
+Use "$x" instead of $x (Prevent surprises when it contains spaces).
+Use Double quotes: keep meaning of the dollar sing intact.
+Good Habit use Braces.
+To tell Bash where the name of your variable ends.
+	filename="${HOME}/${topic}notes.txt"
+Good Habit Use $HOME instead of ~
+----
+[mgw@oc7340054542 Pluralsight]$ files="file1.txt file2.txt"
+[mgw@oc7340054542 Pluralsight]$ touch $files
+[mgw@oc7340054542 Pluralsight]$ ls -l $files
+-rw-rw-r--. 1 mgw mgw 0 feb  1 10:12 file1.txt
+-rw-rw-r--. 1 mgw mgw 0 feb  1 10:12 file2.txt
+----
+Debuggin bash 
+#!/bin/bash -x
+set -x
+-
+|
+|
+|
+-
+set +a
+----
+#!/bin/bash
+#Simple note-taking script
+#Author: reindert
+#get date
+date=$(date)
+#get the topic
+## Usamos la "" para cuando queremos evitar el error en espacios en blanco
+##es una validacion para que el usuario pueda incluir valores en blanco
+### se podria user el tr que use en blank2underscore.sh para formatear la
+### la variable y cambiar los whitespace en underscore
+$1="$1"
+#filename to write to
+filename="${HOME}/${topic}notes.txt"
+#Ask user for input
+read -p "Your note: " note
+
+echo "$date: $note" >> "$filename"
+echo "Note '$note' saved to $filename"
+----
+
+Make Decisions on scrtips
+
+----
+[mgw@oc7340054542 Pluralsight]$ if mkdir a; then echo "ok"; else echo "error";fi
+ok
+[mgw@oc7340054542 Pluralsight]$ if mkdir a; then echo "ok"; else echo "error";fi
+mkdir: cannot create directory ‘a’: File exists
+error
+[mgw@oc7340054542 Pluralsight]$
+----
+
+Return codes
+
+Return code or exist status:
+Value returned by a program upon exit
+0...255
+0 means sucess, others values are error codes
+Shell scrtip return values with exit: exit 0
+Good Habit make sure your program exist with a correct value
+Always call exit with a value
+
+Conditional expressions:
+Test on files and directories
+Test on strings
+Arithmetics tests
+
+Syntax [[ Expresion ]] (Check for withespace)
+Expression			True If
+[[ $str ]]			str is not empty
+[[ $str = "something" ]]	str equals string "something"
+[[ -e $filename ]]		file $filename exists
+[[ -d $dirname ]]		$dirname is a directory
+
+
+

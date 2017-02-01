@@ -1,32 +1,36 @@
-#!/bin/bash
+#!/bin/bash 
 #let's se if there's a file in ~/Desktop
-declare -a FILES
-declare FECHA
-declare DIA
-declare FILE2
-declare DESKTOP
-declare HERE
-declare -a LISTA_DE_ARCHIVOS
+declare fecha
+declare dia
+declare mes
+declare year
+declare file2
+declare desktop
+declare here
+#File list certain criteria $dia
+declare -a files
+#File list at ~/Desktop/
+declare -a lista_de_archivos
 #Set Working Directory
-HERE="$(pwd)"
+here="$(pwd)"
 #Set Desktop PATH
-DESKTOP=/home/$USER/Desktop/
+desktop=/home/$USER/Desktop/
+#Workgin with date
 #We set the current day
-DIA="$(date +*%Y_*%d*%H*)"
+dia="$(date +%d)"
+dia="$(expr substr $dia 2 1)"
+mes="$(date +%m)"
+mes="$(expr substr $mes 2 1)"
+year="$(date +%Y)"
+fecha="*${year}_${mes}_${dia}*"
 #Put entire list from ~/Desktop/
-LISTA_DE_ARCHIVOS="$(ls /home/$USER/Desktop/)" #If "ls -l" shows any file this file will match with next format "NotesX_YYYY_M_D_HH_M_SS_Response_to_INCIDENT_.pdf"
-FILES="$(find $DESKTOP -type f -name $DIA)"
-#printf "%s\n" "${FILES[@]}"
+lista_de_archivos="$(ls /home/$USER/Desktop/)" #If "ls -l" shows any file this file will match with next format "NotesX_YYYY_M_D_HH_M_SS_Response_to_INCIDENT_.pdf"
+files="$(find $desktop -type f -name $fecha)"
+#printf "%s\n" "${files[@]}"
 #Show the list content
-if [[ -n $LISTA_DE_ARCHIVOS ]];  then
-    #echo "File does exists..."
-    #echo
-    #printf "%s\n" "${LISTA_DE_ARCHIVOS[@]}"
-    mv $FILES $HERE
-#   printf "%s\n" "${LISTA_DE_ARCHIVOS[@]}"
-    #echo `expr "${LISTA_DE_ARCHIVOS[@]}"`
+if [[ -n $lista_de_archivos ]] && [[ -n $files ]] ;  then
+    mv $files $here
   else
-    echo "There is no files in $DESKTOP ..."
+    echo "There is no files in $desktop ..."
 fi
-
 #EOF
