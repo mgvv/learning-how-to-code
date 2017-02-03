@@ -116,5 +116,155 @@ Expression			True If
 [[ -e $filename ]]		file $filename exists
 [[ -d $dirname ]]		$dirname is a directory
 
+Spaces around the expression are very important!
+Same for switches (-e) and equals sign.
 
+----
+[mgw@oc7340054542 Pluralsight]$ help [[
+[[ ... ]]: [[ expression ]]
+    Execute conditional command.
+
+    Returns a status of 0 or 1 depending on the evaluation of the conditional
+    expression EXPRESSION.  Expressions are composed of the same primaries used
+    by the `test' builtin, and may be combined using the following operators:
+
+      ( EXPRESSION )    Returns the value of EXPRESSION
+      ! EXPRESSION              True if EXPRESSION is false; else false
+      EXPR1 && EXPR2    True if both EXPR1 and EXPR2 are true; else false
+      EXPR1 || EXPR2    True if either EXPR1 or EXPR2 is true; else false
+
+    When the `==' and `!=' operators are used, the string to the right of
+    the operator is used as a pattern and pattern matching is performed.
+    When the `=~' operator is used, the string to the right of the operator
+    is matched as a regular expression.
+
+    The && and || operators do not evaluate EXPR2 if EXPR1 is sufficient to
+    determine the expression's value.
+
+    Exit Status:
+    0 or 1 depending on value of EXPRESSION.
+----
+----
+[mgw@oc7340054542 Pluralsight]$ help test
+test: test [expr]
+    Evaluate conditional expression.
+
+    Exits with a status of 0 (true) or 1 (false) depending on
+    the evaluation of EXPR.  Expressions may be unary or binary.  Unary
+    expressions are often used to examine the status of a file.  There
+    are string operators and numeric comparison operators as well.
+
+    The behavior of test depends on the number of arguments.  Read the
+    bash manual page for the complete specification.
+
+    File operators:
+
+      -a FILE        True if file exists.
+      -b FILE        True if file is block special.
+      -c FILE        True if file is character special.
+      -d FILE        True if file is a directory.
+      -e FILE        True if file exists.
+      -f FILE        True if file exists and is a regular file.
+      -g FILE        True if file is set-group-id.
+      -h FILE        True if file is a symbolic link.
+      -L FILE        True if file is a symbolic link.
+      -k FILE        True if file has its `sticky' bit set.
+      -p FILE        True if file is a named pipe.
+      -r FILE        True if file is readable by you.
+      -s FILE        True if file exists and is not empty.
+      -S FILE        True if file is a socket.
+      -t FD          True if FD is opened on a terminal.
+      -u FILE        True if the file is set-user-id.
+      -w FILE        True if the file is writable by you.
+      -x FILE        True if the file is executable by you.
+      -O FILE        True if the file is effectively owned by you.
+      -G FILE        True if the file is effectively owned by your group.
+      -N FILE        True if the file has been modified since it was last read.
+.........
+----
+Contional expression 2
+
+Classical command: "test"
+Also : "["
+Harder to use, easer to make mistakes
+Only use for portability
+
+[[ ... ]] is a bash extension not a command but special syntax
+No quotes needed around variables
+Good Habit: use [[ ... ]] intead of [ ... ]
+
+Arithmetic tests
+
+For comparing integers only
+[[ arg1 OP arg2 ]]
+Don't use 0. <, > for numbers! use only for strings
+Use "!" to nagate test
+Use "&&" for "and"
+Use "||" for "or"
+elif
+Nested if
+Return codes
+
+
+Special variables
+$# contains number of script arguments.
+$? contains exit status for last command.
+
+To get the length of the string in a variable:
+Use ${#var}
+
+Input & output
+
+echo - Prints its arguments to standar output, followed by a newline
+	-n supresses new line
+	-e allows use of escape sequences
+		\t: tab
+		\b backspace
+printf
+	can do more sophisticated output than echo
+	Uses a formating string
+	help printf
+	man printf
+	http://wiki.bash-hackers.org/commands/builtin/printf
+----
+[mgw@oc7340054542 Pluralsight]$ printf "hello"
+hello[mgw@oc7340054542 Pluralsight]$ printf "hello\n"
+hello
+[mgw@oc7340054542 Pluralsight]$ printf "hello %s, how are you ?\n" $USER
+hello mgw, how are you ?
+[mgw@oc7340054542 Pluralsight]$ printf "p%st\n" a e i o u
+pat
+pet
+pit
+pot
+put
+[mgw@oc7340054542 Pluralsight]$ printf "%ss Home is in %s\n" $HOME $USER
+/home/mgws Home is in mgw
+----
+
+read revisited
+	Read input into a variable.
+	"read x".
+	No variable specified? Will use REPLY.
+	-n or -N specifies number of characters to read.
+	-s will supress output (useful for password).
+	-r disallows escape sequences, line continuation.
+	Good Habit always use -r
+	read can read words in a line into multiple variables
+		read x y
+		input "1 2 3": x="1", y="23"
+		Use IFS variable for delimiters
+----
+[mgw@oc7340054542 Pluralsight]$ read; echo $REPLY
+\
+>
+
+[mgw@oc7340054542 Pluralsight]$ read; echo $REPLY
+\\
+\
+[mgw@oc7340054542 Pluralsight]$ read -r; echo $REPLY
+\
+\
+[mgw@oc7340054542 Pluralsight]$
+----
 
