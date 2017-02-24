@@ -1,0 +1,2 @@
+vie feb  3 11:33:33 CST 2017: Trabajando con redirecciones
+vie feb  3 11:38:32 CST 2017: This come from a file
