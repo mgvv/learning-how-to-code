@@ -268,3 +268,234 @@ read revisited
 [mgw@oc7340054542 Pluralsight]$
 ----
 
+Standar Streams
+Three standars streams
+	input	/dev/stdin
+	output	/dev/stdout
+	error	/dev/stderr	Used for diagnostic or error message
+	/dev/null discard all data sent to it.
+
+Redirections
+	Input redirection: <
+	Output redirection: >
+	Aoppend to the end of a file: >>
+	Pipe
+
+Redirections 2
+	Redirect a specific stream with N>
+		"cmd 2> /dev/null" discards all errors
+	Redirect to a specific stream with >&N
+		>&2 sends output to stderr (equivalent to 1>&2)
+		2>&1 redirects stderr into stdout
+	Sending both error and output to a single file
+		"cmd > logfile 2>&1"
+		Don't do this: cmd > logfile 2> logfile 
+
+----
+[mgw@oc7340054542 Pluralsight]$ ls > demo
+[mgw@oc7340054542 Pluralsight]$ cat demo
+a
+AreYouSure.sh
+compare_directories.sh
+create_script.sh
+demo
+file1.txt
+file2.txt
+Shell_Scripting_With_Bash.txt
+taking_note.sh
+testing_create_script
+[mgw@oc7340054542 Pluralsight]$ echo "\n" >> demo
+[mgw@oc7340054542 Pluralsight]$ ./taking_note.sh >> demo
+Your note: Trabajando con redirecciones
+[mgw@oc7340054542 Pluralsight]$ cat demo
+a
+AreYouSure.sh
+compare_directories.sh
+create_script.sh
+demo
+file1.txt
+file2.txt
+Shell_Scripting_With_Bash.txt
+taking_note.sh
+testing_create_script
+\n
+Note 'Trabajando con redirecciones' saved to /home/mgw/Documents/Extra/learning-how-to-
+code/Learning_Bash_Advanced/Pluralsight/notes.txt
+[mgw@oc7340054542 Pluralsight]$ echo "This come from a file" > note.txt
+[mgw@oc7340054542 Pluralsight]$ ./taking_note.sh < note.txt
+Note 'This come from a file' saved to /home/mgw/Documents/Extra/learning-how-to-code/Learning_Bash_Advanced/Pluralsight/notes.txt
+[mgw@oc7340054542 Pluralsight]$ cat notes.txt
+vie feb  3 11:33:33 CST 2017: Trabajando con redirecciones
+vie feb  3 11:38:32 CST 2017: This come from a file
+[mgw@oc7340054542 Pluralsight]$
+----
+
+check for create_script.sh script, put attention on redirection
+2> /dev/null
+Redirecciona stdout a null
+#check if the script's name is a command                                                                                                                                     
+37 if type "$scriptname" 2> /dev/null ; then                                                                                                                                    
+38 →       echo "There is already a command with name ${scriptname}"                                                                                                            
+39 →       exit 1   
+----
+[mgw@oc7340054542 Pluralsight]$ ./create_script.sh new2
+./create_script.sh: line 37: type: new2: not found
+Script created; not starting editor because $EDITOR is not set.
+[mgw@oc7340054542 Pluralsight]$ ./create_script.sh new3
+Script created; not starting editor because $EDITOR is not set.
+[mgw@oc7340054542 Pluralsight]$
+----
+
+check for create_script.sh script, put attention on redirection
+> /dev/null 2>&1
+Redirecciona 
+#check if the script's name is a command                                                                                                                                     
+37 if type "$scriptname" > /dev/null 2>&1 ; then                                                                                                                                
+38 →       echo "There is already a command with name ${scriptname}"                                                                                                            
+39 →       exit 1                                                                                                                                                               
+40 fi                              
+[mgw@oc7340054542 Pluralsight]$ ./create_script.sh cp
+cp is /usr/bin/cp
+There is already a command with name cp
+[mgw@oc7340054542 Pluralsight]$ ./create_script.sh cp
+There is already a command with name cp
+[mgw@oc7340054542 Pluralsight]$
+----
+
+Summary Redirections
+Redirecting a specific stream, next example will let you redirect only errors: 
+2>
+Redirecting into another stream, this will let you redirect the error steam into the standard
+output stream.
+2>&1
+
+Control flow 
+	Loops.
+	while test; do
+		;; code to repeat
+	done
+	
+	until test; do
+		;; code to repeat
+	done
+	for VAR in WORDS; do
+		;; code to be repeated
+	done
+----
+[mgw@oc7340054542 Pluralsight]$ for i in Just a list of words; do echo $i; done
+Just
+a
+list
+of
+words
+[mgw@oc7340054542 Pluralsight]$ for i in "Just a list of words"; do echo $i; done
+Just a list of words
+[mgw@oc7340054542 Pluralsight]$
+[mgw@oc7340054542 Pluralsight]$ s="This variable contains a list fo words"
+[mgw@oc7340054542 Pluralsight]$ for i in "$s"; do echo $i; done
+This variable contains a list fo words
+[mgw@oc7340054542 Pluralsight]$ for i in $s; do echo $i; done
+This
+variable
+contains
+a
+list
+fo
+words
+[mgw@oc7340054542 Pluralsight]$
+----
+	The C-Style for Loop
+	for (( INIT; TEST; UPDATE )); do
+		;; loop code
+	done
+		Use double parentheses
+		First expression "INI": initialize your loop variable(s)
+		Second expression "TEST": a test. The loop will run as long as this is true
+		Third expression "UPDATE": update the loop variable(s)
+	Break and continue
+		break quits the loop
+		continue 
+			skips the rest of the current iteration
+			continues with next iteration
+		both can be used in for, while and until
+	Case
+		case WORD in
+			PATTERN1)
+				;;
+			PATTERN2)
+				;;
+			PATTERNn)
+				;;
+		esac
+
+Command Groups
+	Group commands with {}
+		will group them into a single statement
+	Compound comands
+	&& and || operators
+	
+Advance features
+	declare
+		declare -i num
+			Now $num can only hold numbers, Trying to set it to shomthing else will NOt give an error, instead, this will ser a value of 0.
+		Unset an attribute with +
+		declare +i num 
+	Integer variables
+	Read-Only variables
+	Exporting
+		By default, variables are local to your script or terminal.
+		Export a variable to make it available to subprocesses, You cannot pass a variable to the program that runs your script.
+		exṕort var="value"
+		declare -x var="value"
+		Attributes are not exported to other processes
+	Arrays
+
+Working with arguments
+	Special variables
+		positional parameters
+			Hold the n-th command line argunment; $1 $2 etc. All the differents arguments in order.
+			Above 9 use braces: ${10} ${25}
+			$0 hold the name of the script
+			$@:All : Contains all the arguments given to your scripts
+		$* and $
+Getopts
+	Utility to help parse arguments lists
+		Expects options to start with a dash (-x)
+		Allows options that take an argument (-f file)
+	getops opstring name
+		A list of expected options
+		"ab" will let your script handle an option -a and/or -b
+		Append: to options that take and argument
+		"a:b2 will let a take an argument, but no b
+	name	
+		The name of variable
+		Every time you call getopts, it will place the next option into $name
+		getopts returns false when no more options are left.
+Functions
+	Define your own command
+	name () { ... }
+		You can run the code in the braces as a new command
+	Execute it like any command
+		Give it arguments
+		Use redirection
+	Positional parameters are available for function argument
+	Naming your functions
+		same rules for naming scripts
+	Bash variables are globally visible
+		in a function, you can make a variable local to that function
+		use declare local
+	Returning any other 
+		Use a global variable
+		Or send the data to output and use command substitution
+	Exporting a function
+		export -f fun
+	Function and redirections
+		Redirection is allowed immediatly after function definition
+		Will be executed when function is run
+		fun () {...}>&2
+	A command in a pipeline runs in a subshell
+	Here documents
+		Have a command read its input from the source file
+		<<Tag
+		Tag defines end of input
+
