@@ -1,4 +1,5 @@
-#!/bin/bash -
+#!/bin/bash
+#set -x
 #let's se if there's a file in ~/Desktop
 #Set Working Directory
 here="$(pwd)"
@@ -10,7 +11,7 @@ year="$(date +%Y)"
 #Setting the find command criteria
 fecha="*${year}_${mes}_*"
 #Put entire list from ~/Desktop/
-files="$(find $desktop -type f -name $fecha)"
+files="$(find $desktop -type f -name "$fecha")"
 #Evaluate the list content
 if [[ -n $files ]] ;  then
     mv $files $here

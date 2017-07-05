@@ -31,28 +31,28 @@ job=$(tr -s ' ' '_' <<< "$job")
 
 case $system in
 	LCA)
-		set $job="LTS_LCA_${job}"
-		echo "${job}" | xclip -selection c
+		job="LTS_LCA_${job}"
+		echo -n "${job}" | xclip -selection c
 		;;
 
 	LC2)
-		set $job="LTS_LC2_${job}"
-		echo "${job}" | xclip -selection c
+		job=$(echo "LTS_LC2_${job}")
+		echo -n "${job}" | xclip -selection c
 		;;
 
 	LCU)
-		set $job="LTS_LCU_${job}"
-		echo "${job}" | xclip -selection c
+		job="LTS_LCU_${job}"
+		echo -n "${job}" | xclip -selection c
 		;;
 
 	LCD)
-		set $job="LTS_LCD_${job}"
-		echo "${job}" | xclip -selection c
+		job="LTS_LCD_${job}"
+		echo -n "${job}" | xclip -selection c
 		;;
 
 	LCB)
-		set $job="LTS_LCB_${job}"
-		echo "${job}" | xclip -selection c
+		job="LTS_LCB_${job}"
+		echo -n "${job}" | xclip -selection c
 		;;
 
 	*)
